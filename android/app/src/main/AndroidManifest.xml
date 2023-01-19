@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bufskit">
+    package="com.lluudev.bufskit">
    <application
         android:label="bufskit"
         android:name="${applicationName}"
