@@ -72,7 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     Container(
                       height: 55,
                       decoration: BoxDecoration(
@@ -98,7 +100,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     Stack(
                       children: [
                         Container(
@@ -121,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
+                                Navigator.pushNamed(context, '/');
                                 // Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false, arguments: {"update": true});//이전 스택 모두 제거 후 이동
                               },
                             ),
