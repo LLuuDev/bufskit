@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Flexible(
-              flex: 5,
+              flex: 10,
               child: Container(
                 color: Colors.white,
                 padding: const EdgeInsets.all(15),
@@ -49,7 +49,6 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Container(
                       height: 55,
-                      margin: const EdgeInsets.only(bottom: 15),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         boxShadow: [
@@ -73,9 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 15,),
                     Container(
                       height: 55,
-                      margin: const EdgeInsets.only(bottom: 15),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         boxShadow: [
@@ -99,10 +98,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 15,),
                     Stack(
                       children: [
                         Container(
-                          padding: const EdgeInsets.all(20),
+                          height: 55,
                           color: const Color.fromRGBO(113, 111, 233, 1),
                           child: const Center(
                             child: Text(
@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                print("Gradient button clicked!");
+                                // Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false, arguments: {"update": true});//이전 스택 모두 제거 후 이동
                               },
                             ),
                           ),
