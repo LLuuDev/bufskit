@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -8,6 +9,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _pwdController = TextEditingController();
+
+  static const storage =
+      FlutterSecureStorage(); //flutter_secure_storage 사용을 위한 초기화 작업
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -60,10 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ],
                       ),
-                      child: const Center(
+                      child: Center(
                         child: TextField(
+                          controller: _idController,
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
                               contentPadding:
@@ -88,10 +101,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ],
                       ),
-                      child: const Center(
+                      child: Center(
                         child: TextField(
+                          controller: _pwdController,
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
                               contentPadding:
@@ -124,9 +138,14 @@ class _LoginPageState extends State<LoginPage> {
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: () {
+                              onTap: () async {
+                                await storage.write(
+                                    key: "userId",
+                                    value: _idController.text.toString());
+                                await storage.write(
+                                    key: "userPwd",
+                                    value: _pwdController.text.toString());
                                 Navigator.pushNamed(context, '/');
-                                // Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false, arguments: {"update": true});//이전 스택 모두 제거 후 이동
                               },
                             ),
                           ),

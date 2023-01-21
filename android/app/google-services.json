@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "460935847140",
+    "project_id": "bufskit",
+    "storage_bucket": "bufskit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460935847140:android:df49e2315431d589f160f1",
+        "android_client_info": {
+          "package_name": "com.lluudev.bufskit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460935847140-one5r0gmtm2un6m5dfnv7n36gjpefrlf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcXAtg-5rKXLL5o-FNbFT7emlNnZHZIdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460935847140-one5r0gmtm2un6m5dfnv7n36gjpefrlf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "460935847140-t714g172j2rotu44gckemv9f9ah1sbss.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lluudev.bufskit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
