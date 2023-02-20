@@ -11,29 +11,60 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   String? userId = ""; //user의 정보를 저장하기 위한 변수
+  static const storage = FlutterSecureStorage();
 
-  static const storage = FlutterSecureStorage(); //flutter_secure_storage 사용을 위한 초기화 작업
   @override
   void initState() {
     super.initState();
-    //비동기로 flutter secure storage 정보를 불러오는 작업.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
 
   _asyncMethod() async {
-    //read 함수를 통하여 key값에 맞는 정보를 불러오게 됩니다. 이때 불러오는 결과의 타입은 String 타입임을 기억해야 합니다.
-    //(데이터가 없을때는 null을 반환을 합니다.)
-    userId = await storage.read(key:'userId');
-    // print(userId);
-
-    //user의 정보가 있다면 바로 로그아웃 페이지로 넝어가게 합니다.
+    userId = await storage.read(key: 'userId');
     if (userId != null) {
-
+      Navigator.pushNamed(context, '/login');
     } else {
-      // Navigator.pushNamed(context, '/login');
+      Navigator.pushNamed(context, '/login');
+      // Navigator.pushReplacementNamed(context, '/login');
     }
+  }
+
+  _showDialog () {
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Center(
+          child: Text('준비중'),
+        ),
+        // content: Text('아직 개발 중 입니다!'),
+        actions: [
+          Center(
+            child: TextButton(
+                onPressed: () =>
+                    Navigator.of(context).pop(),
+              style: TextButton.styleFrom(
+                foregroundColor: Color.fromRGBO(113, 111, 233, 1),
+              ),
+                child: const Text(
+                  '확인',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color.fromRGBO(113, 111, 233, 1),
+                  ),
+                ),
+            ),
+          )
+        ],
+        shape: const RoundedRectangleBorder(
+          borderRadius:
+          BorderRadius.all(Radius.circular(15)),
+        ),
+      ),
+    );
+
   }
 
   @override
@@ -42,7 +73,6 @@ class _MainPageState extends State<MainPage> {
       body: Column(
         children: [
           Flexible(
-            //타이틀
             flex: 3,
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -87,27 +117,13 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     children: [
                       MainButton('assets/icons/announcement.svg', '일반공지', () {
-                        Navigator.pushNamed(context, '/login');
+                        _showDialog();
                       }),
                       const SizedBox(
                         width: 15,
                       ),
                       MainButton('assets/icons/announcement.svg', '학사공지', () {
-                        Navigator.pushNamed(context, '/login');
-                      }),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      MainButton('assets/icons/schedule.svg', '시간표', () {
-                        Navigator.pushNamed(context, '/login');
-                      }),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      MainButton('assets/icons/student.svg', '학생증', () {
-                        Navigator.pushNamed(context, '/login');
+                        _showDialog();
                       }),
                     ],
                   ),
@@ -115,13 +131,27 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     children: [
                       MainButton('assets/icons/bus.svg', '버스 시간표', () {
-                        Navigator.pushNamed(context, '/login');
+                        _showDialog();
                       }),
                       const SizedBox(
                         width: 15,
                       ),
                       MainButton('assets/icons/food.svg', '오늘의 학식', () {
-                        Navigator.pushNamed(context, '/login');
+                        _showDialog();
+                      }),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      MainButton('assets/icons/schedule.svg', '시간표', () {
+                        _showDialog();
+                      }),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      MainButton('assets/icons/student.svg', '학생증', () {
+                        _showDialog();
                       }),
                     ],
                   ),
@@ -129,14 +159,15 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     children: [
                       MainButton('assets/icons/grade.svg', '학기별 성적', () {
-                        Navigator.pushNamed(context, '/login');
+                        _showDialog();
                       }),
                       const SizedBox(
                         width: 15,
                       ),
                       MainButton('assets/icons/information.svg', '앱 정보', () {
+                        _showDialog();
                         storage.delete(key: "userId");
-                        storage.delete(key: "userPwd");
+                        storage.delete(key: "userPw");
                       }),
                     ],
                   ),
