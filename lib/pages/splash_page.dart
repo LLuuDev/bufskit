@@ -401,39 +401,22 @@ getDatass();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          Flexible(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              color: const Color.fromRGBO(113, 111, 233, 1),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'BUFS',
-                    style: TextStyle(
-                      fontSize: 64,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           SizedBox(
-            height: 500,
+            height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            // height: 0,
-            // width: 0,
+            // height: 1,
+            // width: 1,
             child: InAppWebView(
-              initialUrlRequest:
-              URLRequest(url: Uri.parse("https://m.bufs.ac.kr/")),
               onWebViewCreated: (controller) async {
                 webViewController = controller;
                 await cookieManager.deleteAllCookies();
+                await controller.loadData(data:"");
+                await controller.loadUrl(
+                    urlRequest: URLRequest(
+                        url: Uri.parse(
+                            "https://m.bufs.ac.kr/")));
               },
               onConsoleMessage: (controller, consoleMessage) {
                 // print(consoleMessage);
@@ -456,6 +439,25 @@ getDatass();
                   foodSchedule(controller);
                 }
               },
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: const Color.fromRGBO(113, 111, 233, 1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'BUFS',
+                  style: TextStyle(
+                    fontSize: 64,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
