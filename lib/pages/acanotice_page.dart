@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-class InformationPage extends StatefulWidget {
-  const InformationPage({Key? key}) : super(key: key);
+class AcanoticePage extends StatefulWidget {
+  const AcanoticePage({Key? key}) : super(key: key);
 
   @override
-  State<InformationPage> createState() => _InformationPageState();
+  State<AcanoticePage> createState() => _AcanoticePageState();
 }
 
-class _InformationPageState extends State<InformationPage> {
+class _AcanoticePageState extends State<AcanoticePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

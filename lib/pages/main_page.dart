@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:bufskit/components/main_button.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -10,24 +12,28 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  String? userId = ""; //user의 정보를 저장하기 위한 변수
   static const storage = FlutterSecureStorage();
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _asyncMethod();
-    });
+    _getData();
   }
-
-  _asyncMethod() async {
-    userId = await storage.read(key: 'userId');
-    if (userId != null) {
-      Navigator.pushNamed(context, '/login');
-    } else {
-      Navigator.pushNamed(context, '/login');
-      // Navigator.pushReplacementNamed(context, '/login');
+  _getData () async {
+    var userInfo = await storage.read(key: 'userInfo');
+    var busSchedule = await storage.read(key: 'busSchedule');
+    var foodSchedule = await storage.read(key: 'foodSchedule');
+    if (userInfo != null) {
+      Map<String,dynamic> jsonData = jsonDecode(userInfo);
+      print(jsonData);
+    }
+    if (busSchedule != null) {
+      List<dynamic> jsonDatas = jsonDecode(busSchedule);
+      print(jsonDatas);
+    }
+    if (foodSchedule != null) {
+      Map<String,dynamic> jsonDatass = jsonDecode(foodSchedule);
+      print(jsonDatass);
     }
   }
 
@@ -117,13 +123,13 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     children: [
                       MainButton('assets/icons/announcement.svg', '일반공지', () {
-                        _showDialog();
+                        Navigator.pushNamed(context, '/uninotice');
                       }),
                       const SizedBox(
                         width: 15,
                       ),
                       MainButton('assets/icons/announcement.svg', '학사공지', () {
-                        _showDialog();
+                        Navigator.pushNamed(context, '/acanotice');
                       }),
                     ],
                   ),
@@ -168,6 +174,8 @@ class _MainPageState extends State<MainPage> {
                         _showDialog();
                         storage.delete(key: "userId");
                         storage.delete(key: "userPw");
+                        storage.delete(key: "autoLogin");
+                        storage.delete(key: "manualLogin");
                       }),
                     ],
                   ),

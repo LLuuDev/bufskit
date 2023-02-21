@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:bufskit/pages/login_page.dart';
 import 'package:bufskit/pages/main_page.dart';
 import 'package:bufskit/pages/information_page.dart';
+import 'package:bufskit/pages/uninotice_page.dart';
+import 'package:bufskit/pages/acanotice_page.dart';
+import 'package:bufskit/pages/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,11 +30,14 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
-      initialRoute: '/',
+      initialRoute: '/splash',
       routes: {
         '/': (context) => const MainPage(),
+        '/splash': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
         '/information': (context) => const InformationPage(),
+        '/uninotice': (context) => const UninoticePage(),
+        '/acanotice': (context) => const AcanoticePage(),
       },
     );
   }

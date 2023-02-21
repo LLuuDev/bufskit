@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-class InformationPage extends StatefulWidget {
-  const InformationPage({Key? key}) : super(key: key);
+class UninoticePage extends StatefulWidget {
+  const UninoticePage({Key? key}) : super(key: key);
 
   @override
-  State<InformationPage> createState() => _InformationPageState();
+  State<UninoticePage> createState() => _UninoticePageState();
 }
 
-class _InformationPageState extends State<InformationPage> {
+class _UninoticePageState extends State<UninoticePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _InformationPageState extends State<InformationPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text(
-                    '학사공지',
+                    '일반공지',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w600,
@@ -42,7 +42,7 @@ class _InformationPageState extends State<InformationPage> {
               color: Colors.white,
               padding: const EdgeInsets.all(15),
               child: InAppWebView(
-                initialUrlRequest: URLRequest(url: Uri.parse("https://www.bufs.ac.kr/bbs/board.php?bo_table=notice_aca")),
+                initialUrlRequest: URLRequest(url: Uri.parse("https://www.bufs.ac.kr/bbs/board.php?bo_table=notice_uni")),
               ),
             ),
           ),
