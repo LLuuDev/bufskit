@@ -171,11 +171,7 @@ class _MainPageState extends State<MainPage> {
                         width: 15,
                       ),
                       MainButton('assets/icons/information.svg', '앱 정보', () {
-                        _showDialog();
-                        storage.delete(key: "userId");
-                        storage.delete(key: "userPw");
-                        storage.delete(key: "autoLogin");
-                        storage.delete(key: "manualLogin");
+                        Navigator.pushNamed(context, '/information');
                       }),
                     ],
                   ),
