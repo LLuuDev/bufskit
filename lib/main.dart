@@ -9,6 +9,7 @@ import 'package:bufskit/pages/uninotice_page.dart';
 import 'package:bufskit/pages/acanotice_page.dart';
 import 'package:bufskit/pages/splash_page.dart';
 import 'package:bufskit/pages/schedule_page.dart';
+import 'package:bufskit/pages/score_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/uninotice': (context) => const UninoticePage(),
         '/acanotice': (context) => const AcanoticePage(),
         '/schedule': (context) => const SchedulePage(),
+        '/score': (context) => const ScorePage(),
       },
     );
   }

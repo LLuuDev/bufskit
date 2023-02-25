@@ -165,7 +165,7 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     children: [
                       MainButton('assets/icons/grade.svg', '학기별 성적', () {
-                        _showDialog();
+                        Navigator.pushNamed(context, '/score');
                       }),
                       const SizedBox(
                         width: 15,
