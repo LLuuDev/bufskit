@@ -157,7 +157,7 @@ class _MainPageState extends State<MainPage> {
                         width: 15,
                       ),
                       MainButton('assets/icons/student.svg', '학생증', () {
-                        _showDialog();
+                        Navigator.pushNamed(context, '/student');
                       }),
                     ],
                   ),

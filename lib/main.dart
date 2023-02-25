@@ -10,6 +10,7 @@ import 'package:bufskit/pages/acanotice_page.dart';
 import 'package:bufskit/pages/splash_page.dart';
 import 'package:bufskit/pages/schedule_page.dart';
 import 'package:bufskit/pages/score_page.dart';
+import 'package:bufskit/pages/student_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/acanotice': (context) => const AcanoticePage(),
         '/schedule': (context) => const SchedulePage(),
         '/score': (context) => const ScorePage(),
+        '/student': (context) => const StudentPage(),
       },
     );
   }
