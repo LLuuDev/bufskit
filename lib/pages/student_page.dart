@@ -145,7 +145,7 @@ class _StudentPageState extends State<StudentPage> {
                                     color: const Color.fromRGBO(113, 111, 233, 1),
                                     child: const Center(
                                       child: Text(
-                                        "영문",
+                                        "영문명",
                                         style: TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.w600,
