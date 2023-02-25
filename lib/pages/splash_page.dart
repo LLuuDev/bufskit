@@ -132,6 +132,7 @@ const getUserclass = async () => {
     //과목별 위치
     //학기 갯수 만큼 반복
     userInfo.class = {};
+    weekDate = ['월','화','수','목','금']
     for (let i = 0; i < classSemestertbody().getElementsByTagName("tr").length - 1; i++) {
         //학기정보 저장 최근 학기부터
         let classSemester = classSemestertbody()
@@ -154,15 +155,15 @@ const getUserclass = async () => {
                 //클릭한 학기값과 조회한 학기 값이 같다면
                 if (tmp === classSemester) {
                     semesterInfo = tmp.replace(/(\\t|\\n)/g, "");
-                    userInfo.class[semesterInfo] = {};
+                    userInfo.class[semesterInfo] = [[],[],[],[],[]];
                     //과목 갯수만큼 반복
                     for (let j = 0; j < classSubjecttbody().getElementsByTagName("tr").length - 1; j++) {
                         subjectInfo = classSubjecttbody()
                             .getElementsByTagName("tr")
                             [j + 1].getElementsByTagName("td")[1].innerText;
-                        userInfo.class[semesterInfo][subjectInfo] = {};
-
-                        let classrooms = {};
+                        // userInfo.class[semesterInfo][subjectInfo] = {};
+                        //
+                        // let classrooms = {};
                         strcc = classSubjecttbody()
                             .getElementsByTagName("tr")
                             [j + 1].getElementsByTagName("td")[6].innerText;
@@ -173,37 +174,51 @@ const getUserclass = async () => {
                             schedulecc = tmpcc[1].slice(0, -1).split(",");
 
                             if (classroomcc.length === 1) {
-                                datetmpcc = "월";
+                                datestmpcc = "월";
+                                datetmpcc = "1";
                                 classtmpcc = classroomcc[0];
-
                                 for (let p = 0; p < schedulecc.length; p++) {
-                                    if (schedulecc[p].length === 2) {
-                                        datetmpcc = schedulecc[p][0];
-                                        classrooms[schedulecc[p]] = classtmpcc;
+                                    if (isNaN(parseInt(schedulecc[p]))) {
+                                        datestmpcc = weekDate.indexOf(schedulecc[p][0])
+                                        datetmpcc = schedulecc[p].slice(1);
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc] = []
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc].push(subjectInfo);
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc].push(1);
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc].push(classtmpcc);
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc].push(classSubjecttbody()
+                                            .getElementsByTagName("tr")
+                                            [j + 1].getElementsByTagName("td")[7].innerText)
+
                                     } else {
-                                        classrooms[datetmpcc + schedulecc[p]] = classtmpcc;
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc][1] += 1;
+
                                     }
                                 }
                             } else {
-                                datetmpcc = "월";
+                                datestmpcc = "월";
+                                datetmpcc = "1";
                                 classtmpcc = classroomcc[0];
                                 classtmpcountcc = 0;
                                 for (let p = 0; p < schedulecc.length; p++) {
-                                    if (schedulecc[p].length === 2) {
-                                        datetmpcc = schedulecc[p][0];
+                                    if (isNaN(parseInt(schedulecc[p]))) {
+                                        datestmpcc = weekDate.indexOf(schedulecc[p][0])
+                                        datetmpcc = schedulecc[p].slice(1);
                                         classtmpcc = classroomcc[classtmpcountcc];
                                         classtmpcountcc += 1;
-                                        classrooms[schedulecc[p]] = classtmpcc;
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc] = []
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc].push(subjectInfo);
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc].push(1);
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc].push(classtmpcc);
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc].push(classSubjecttbody()
+                                            .getElementsByTagName("tr")
+                                            [j + 1].getElementsByTagName("td")[7].innerText)
                                     } else {
-                                        classrooms[datetmpcc + schedulecc[p]] = classtmpcc;
+                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc][1] += 1;
+
                                     }
                                 }
                             }
                         }
-                        userInfo.class[semesterInfo][subjectInfo].classroom = classrooms;
-                        userInfo.class[semesterInfo][subjectInfo].professor = classSubjecttbody()
-                            .getElementsByTagName("tr")
-                            [j + 1].getElementsByTagName("td")[7].innerText;
                     }
                     //현재 인터벌 초기화
                     clearInterval(ids);

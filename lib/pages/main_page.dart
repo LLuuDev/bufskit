@@ -25,15 +25,15 @@ class _MainPageState extends State<MainPage> {
     var foodSchedule = await storage.read(key: 'foodSchedule');
     if (userInfo != null) {
       Map<String,dynamic> jsonData = jsonDecode(userInfo);
-      print(jsonData);
+      // print(jsonData);
     }
     if (busSchedule != null) {
       List<dynamic> jsonDatas = jsonDecode(busSchedule);
-      print(jsonDatas);
+      // print(jsonDatas);
     }
     if (foodSchedule != null) {
       Map<String,dynamic> jsonDatass = jsonDecode(foodSchedule);
-      print(jsonDatass);
+      // print(jsonDatass);
     }
   }
 
@@ -104,7 +104,7 @@ class _MainPageState extends State<MainPage> {
             flex: 10,
             child: Container(
               color: Colors.white,
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: Column(
                 children: [
                   Row(
@@ -151,7 +151,7 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     children: [
                       MainButton('assets/icons/schedule.svg', '시간표', () {
-                        _showDialog();
+                        Navigator.pushNamed(context, '/schedule');
                       }),
                       const SizedBox(
                         width: 15,

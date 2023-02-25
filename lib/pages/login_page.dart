@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
               flex: 10,
               child: Container(
                 color: Colors.white,
-                padding: const EdgeInsets.all(15),
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                 child: AutofillGroup(
                   child: Column(
                     children: [

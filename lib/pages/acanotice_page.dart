@@ -40,7 +40,7 @@ class _AcanoticePageState extends State<AcanoticePage> {
             flex: 10,
             child: Container(
               color: Colors.white,
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: InAppWebView(
                 initialUrlRequest: URLRequest(url: Uri.parse("https://www.bufs.ac.kr/bbs/board.php?bo_table=notice_aca")),
               ),
