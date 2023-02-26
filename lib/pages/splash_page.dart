@@ -24,9 +24,18 @@ class _SplashPageState extends State<SplashPage> {
   String? userPw = ""; //user의 정보를 저장하기 위한 변수
   String? autoLogin = ""; //user의 정보를 저장하기 위한 변수
   String? manualLogin = ""; //user의 정보를 저장하기 위한 변수
+  String? fastLogin = "false"; //나중에 성적 새로고침 할때 false 로 바꿔주기
   String? failLogin = ""; //user의 정보를 저장하기 위한 변수
   static const storage = FlutterSecureStorage();
-
+  CookieManager cookieManager = CookieManager.instance();
+  bool? _tryLogin = false;
+  bool? _checkLogin = false;
+  bool? _checkData = false;
+  bool? _busSchedule = false;
+  bool? _foodSchedule = false;
+  late Timer _timer1;
+  late Timer _timer2;
+  late Timer _timer3;
   _asyncMethod() async {
     userId = await storage.read(key: 'userId');
     userPw = await storage.read(key: 'userPw');
@@ -40,6 +49,12 @@ class _SplashPageState extends State<SplashPage> {
     } else {
       if (autoLogin == "true") {
       } else {
+        await storage.delete(key: "userId");
+        await storage.delete(key: "userPw");
+        await storage.delete(key: "autoLogin");
+        await storage.delete(key: "manualLogin");
+        await storage.delete(key: "fastLogin");
+        await storage.delete(key: "userInfo");
         Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false,);
 
       }
@@ -59,15 +74,7 @@ class _SplashPageState extends State<SplashPage> {
       ios: IOSInAppWebViewOptions(
         allowsInlineMediaPlayback: true,
       ));
-  CookieManager cookieManager = CookieManager.instance();
-  bool? _tryLogin = false;
-  bool? _checkLogin = false;
-  bool? _checkData = false;
-  bool? _busSchedule = false;
-  bool? _foodSchedule = false;
-  late Timer _timer1;
-  late Timer _timer2;
-  late Timer _timer3;
+
 
 
   void isLogin(controller) async {
@@ -85,6 +92,7 @@ class _SplashPageState extends State<SplashPage> {
   } // 로그인
 
   void checkLogin(controller) async {
+    sleep(const Duration(milliseconds:500));
     await controller.evaluateJavascript(source: """
       try {
           logout = document.getElementsByClassName("logout")[0].innerText
@@ -105,7 +113,6 @@ class _SplashPageState extends State<SplashPage> {
     }
     sleep(const Duration(milliseconds:500));
     if ((await controller.evaluateJavascript(source: 'loginStatus')) == false) {
-      // print('1');
       await storage.write(
           key: "failLogin",
           value: "true");
@@ -428,15 +435,30 @@ getDatass();
                 webViewController = controller;
                 await cookieManager.deleteAllCookies();
                 await controller.loadData(data:"");
-                await controller.loadUrl(
-                    urlRequest: URLRequest(
-                        url: Uri.parse(
-                            "https://m.bufs.ac.kr/")));
+                fastLogin = await storage.read(key: 'fastLogin');
+                if (fastLogin == "true") {
+                  setState(() {
+                    _tryLogin = true;
+                    _checkLogin = true;
+                    _checkData = true;
+                  });
+                  await controller.loadUrl(
+                      urlRequest: URLRequest(
+                          url: Uri.parse(
+                              "https://www.bufs.ac.kr/bbs/board.php?bo_table=camp_guide&sca=%EC%85%94%ED%8B%80%EB%B2%84%EC%8A%A4%EC%95%88%EB%82%B4")));
+                  // busSchedule(controller);
+                } else {
+                  await controller.loadUrl(
+                      urlRequest: URLRequest(
+                          url: Uri.parse(
+                              "https://m.bufs.ac.kr/")));
+                }
               },
               onConsoleMessage: (controller, consoleMessage) {
                 // print(consoleMessage);
               },
               onLoadStop: (controller, url) async {
+
                 // print("1");
                 if (userId != null && _tryLogin == false) {
                   isLogin(controller);

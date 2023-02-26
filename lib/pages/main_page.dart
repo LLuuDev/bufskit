@@ -25,6 +25,9 @@ class _MainPageState extends State<MainPage> {
     var foodSchedule = await storage.read(key: 'foodSchedule');
     if (userInfo != null) {
       Map<String,dynamic> jsonData = jsonDecode(userInfo);
+      await storage.write(
+          key: "fastLogin",
+          value: "true");
       // print(jsonData);
     }
     if (busSchedule != null) {
@@ -143,7 +146,7 @@ class _MainPageState extends State<MainPage> {
                         width: 15,
                       ),
                       MainButton('assets/icons/food.svg', '오늘의 학식', () {
-                        _showDialog();
+                        Navigator.pushNamed(context, '/food');
                       }),
                     ],
                   ),

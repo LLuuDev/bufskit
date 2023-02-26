@@ -80,7 +80,7 @@ class _InformationPageState extends State<InformationPage> {
                               color: Colors.white,
                               child: const Center(
                                 child: Text(
-                                  "0.0.1",
+                                  "0.0.1+1",
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,
@@ -171,6 +171,8 @@ class _InformationPageState extends State<InformationPage> {
                               await storage.delete(key: "userPw");
                               await storage.delete(key: "autoLogin");
                               await storage.delete(key: "manualLogin");
+                              await storage.delete(key: "fastLogin");
+                              await storage.delete(key: "userInfo");
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 '/splash',
