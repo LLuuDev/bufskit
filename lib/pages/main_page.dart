@@ -1,4 +1,4 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:bufskit/components/main_button.dart';
@@ -21,60 +21,60 @@ class _MainPageState extends State<MainPage> {
   }
   _getData () async {
     var userInfo = await storage.read(key: 'userInfo');
-    var busSchedule = await storage.read(key: 'busSchedule');
-    var foodSchedule = await storage.read(key: 'foodSchedule');
+    // var busSchedule = await storage.read(key: 'busSchedule');
+    // var foodSchedule = await storage.read(key: 'foodSchedule');
     if (userInfo != null) {
-      Map<String,dynamic> jsonData = jsonDecode(userInfo);
+      // Map<String,dynamic> jsonData = jsonDecode(userInfo);
       await storage.write(
           key: "fastLogin",
           value: "true");
       // print(jsonData);
     }
-    if (busSchedule != null) {
-      List<dynamic> jsonDatas = jsonDecode(busSchedule);
-      // print(jsonDatas);
-    }
-    if (foodSchedule != null) {
-      Map<String,dynamic> jsonDatass = jsonDecode(foodSchedule);
-      // print(jsonDatass);
-    }
+    // if (busSchedule != null) {
+    //   List<dynamic> jsonDatas = jsonDecode(busSchedule);
+    //   // print(jsonDatas);
+    // }
+    // if (foodSchedule != null) {
+    //   Map<String,dynamic> jsonDatass = jsonDecode(foodSchedule);
+    //   // print(jsonDatass);
+    // }
   }
 
-  _showDialog () {
-    return showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Center(
-          child: Text('준비중'),
-        ),
-        // content: Text('아직 개발 중 입니다!'),
-        actions: [
-          Center(
-            child: TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pop(),
-              style: TextButton.styleFrom(
-                foregroundColor: Color.fromRGBO(113, 111, 233, 1),
-              ),
-                child: const Text(
-                  '확인',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color.fromRGBO(113, 111, 233, 1),
-                  ),
-                ),
-            ),
-          )
-        ],
-        shape: const RoundedRectangleBorder(
-          borderRadius:
-          BorderRadius.all(Radius.circular(15)),
-        ),
-      ),
-    );
-
-  }
+  // _showDialog () {
+  //   return showDialog(
+  //     context: context,
+  //     barrierDismissible: true,
+  //     builder: (BuildContext context) => AlertDialog(
+  //       title: const Center(
+  //         child: Text('준비중'),
+  //       ),
+  //       // content: Text('아직 개발 중 입니다!'),
+  //       actions: [
+  //         Center(
+  //           child: TextButton(
+  //               onPressed: () =>
+  //                   Navigator.of(context).pop(),
+  //             style: TextButton.styleFrom(
+  //               foregroundColor: Color.fromRGBO(113, 111, 233, 1),
+  //             ),
+  //               child: const Text(
+  //                 '확인',
+  //                 style: TextStyle(
+  //                   fontSize: 16,
+  //                   color: Color.fromRGBO(113, 111, 233, 1),
+  //                 ),
+  //               ),
+  //           ),
+  //         )
+  //       ],
+  //       shape: const RoundedRectangleBorder(
+  //         borderRadius:
+  //         BorderRadius.all(Radius.circular(15)),
+  //       ),
+  //     ),
+  //   );
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +140,7 @@ class _MainPageState extends State<MainPage> {
                   Row(
                     children: [
                       MainButton('assets/icons/bus.svg', '버스 시간표', () {
-                        _showDialog();
+                        Navigator.pushNamed(context, '/bus');
                       }),
                       const SizedBox(
                         width: 15,

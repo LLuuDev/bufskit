@@ -12,6 +12,7 @@ import 'package:bufskit/pages/schedule_page.dart';
 import 'package:bufskit/pages/score_page.dart';
 import 'package:bufskit/pages/student_page.dart';
 import 'package:bufskit/pages/food_page.dart';
+import 'package:bufskit/pages/bus_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/score': (context) => const ScorePage(),
         '/student': (context) => const StudentPage(),
         '/food': (context) => const FoodPage(),
+        '/bus': (context) => const BusPage(),
       },
     );
   }
