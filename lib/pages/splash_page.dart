@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+// import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -86,29 +87,54 @@ class _SplashPageState extends State<SplashPage> {
 
 
   void isLogin(controller) async {
+
+    await controller.evaluateJavascript(
+        source:"""
+        const login = () => {
+          document.getElementById("txtUserID").value = "$userId";
+          document.getElementById("txtPasswd").value = "$userPw";
+          document.getElementById("btnLogin").click();
+        };
+        
+        if (document.readyState === "complete") {
+            login();
+        } else {
+            window.addEventListener('load', login);
+        }
+        """
+    );
     setState(() {
       _tryLogin = true;
     });
-    await controller.evaluateJavascript(
-        source: 'document.getElementById("txtUserID").value = "$userId";');
-    await controller.evaluateJavascript(
-        source: 'document.getElementById("txtPasswd").value = "$userPw";');
-    await controller.evaluateJavascript(
-        source: 'document.getElementById("btnLogin").click();');
+    //     await controller.evaluateJavascript(
+    //     source: 'document.getElementById("txtUserID").value = "$userId";');
+    // await controller.evaluateJavascript(
+    //     source: 'document.getElementById("txtPasswd").value = "$userPw";');
+    // await controller.evaluateJavascript(
+    //     source: 'document.getElementById("btnLogin").click();');
 
     // print(await controller.evaluateJavascript(source: 'loginStatus'));
   } // 로그인
 
   void checkLogin(controller) async {
-    sleep(const Duration(milliseconds:500));
+    // sleep(const Duration(milliseconds:500));
     await controller.evaluateJavascript(source: """
-      try {
-          logout = document.getElementsByClassName("logout")[0].innerText
-          loginStatus = true
-      } catch (e) {
-          loginStatus = false
-      }
+        const checklogin = () => {
+          try {
+              logout = document.getElementsByClassName("logout")[0].innerText
+              loginStatus = true
+          } catch (e) {
+              loginStatus = false
+          }
+        };
+        
+        if (document.readyState === "complete") {
+            checklogin();
+        } else {
+            window.addEventListener('load', checklogin);
+        }
       """);
+    sleep(const Duration(milliseconds:500));
     if ((await controller.evaluateJavascript(source: 'loginStatus')) == true) {
       setState(() {
         _checkLogin = true;
@@ -118,9 +144,7 @@ class _SplashPageState extends State<SplashPage> {
               url: Uri.parse(
                   "https://m.bufs.ac.kr/SAHJ/A/SAHJA0010S.aspx?mc=0947")));
       // Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false,);
-    }
-    sleep(const Duration(milliseconds:500));
-    if ((await controller.evaluateJavascript(source: 'loginStatus')) == false) {
+    } else {
       await storage.write(
           key: "failLogin",
           value: "true");
@@ -400,7 +424,7 @@ getDatass();
           _foodSchedule = true;
         });
         _timer3.cancel();
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false,);
+        await Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false,);
       }
     });
   }
