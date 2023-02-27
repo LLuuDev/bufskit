@@ -253,7 +253,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                                       color: classList[scheduleSemester[i][index][0]],
                                                       padding: const EdgeInsets.all(3),
                                                       child: SingleChildScrollView(
-                                                        physics: const  ClampingScrollPhysics(),
+                                                        physics: const ClampingScrollPhysics(),
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
