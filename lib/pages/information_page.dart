@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:yaml/yaml.dart';
 
 class InformationPage extends StatefulWidget {
   const InformationPage({Key? key}) : super(key: key);
@@ -11,6 +13,24 @@ class InformationPage extends StatefulWidget {
 class _InformationPageState extends State<InformationPage> {
   static const storage = FlutterSecureStorage();
 
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  String appVersion = "";
+
+  _getData() async {
+    var tmpappVersion = '';
+    await rootBundle.loadString('pubspec.yaml').then((yamlValue) {
+      var yaml = loadYaml(yamlValue);
+      tmpappVersion = yaml['version'];
+    });
+    setState(()  {
+      appVersion = tmpappVersion;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +98,9 @@ class _InformationPageState extends State<InformationPage> {
                             child: Container(
                               height: 55,
                               color: Colors.white,
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  "0.0.1+1",
+                                  appVersion,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,

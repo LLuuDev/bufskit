@@ -338,11 +338,15 @@ dataStatus = false
 const getData = async () => {
     await getUserinfo();
     await getUserclass();
-    await getUserscore();
+    try {
+        await getUserscore();
+    } catch (e) {
+    }
     userInfo = JSON.stringify(userInfo);
     dataStatus = true
 };
 getData();
+
 
       """);
     _timer1 = Timer.periodic(Duration(milliseconds:100), (timer) async {
