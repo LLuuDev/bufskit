@@ -139,7 +139,7 @@ class _BusPageState extends State<BusPage> {
                         children: [
                           Container(
                               height: 55,
-                              padding: const EdgeInsets.all(15),
+                              padding: const EdgeInsets.only(left: 15,right: 15),
                               color: const Color.fromRGBO(113, 111, 233, 1),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

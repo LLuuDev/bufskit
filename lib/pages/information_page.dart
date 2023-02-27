@@ -167,12 +167,14 @@ class _InformationPageState extends State<InformationPage> {
                           color: Colors.transparent,
                           child: InkWell(
                             onTap: () async {
-                              await storage.delete(key: "userId");
-                              await storage.delete(key: "userPw");
-                              await storage.delete(key: "autoLogin");
-                              await storage.delete(key: "manualLogin");
-                              await storage.delete(key: "fastLogin");
-                              await storage.delete(key: "userInfo");
+                              // await storage.delete(key: "userId");
+                              // await storage.delete(key: "userPw");
+                              // await storage.delete(key: "autoLogin");
+                              // await storage.delete(key: "manualLogin");
+                              // await storage.delete(key: "fastLogin");
+                              // await storage.delete(key: "userInfo");
+                              await storage.deleteAll();
+                              await storage.write(key: "privacy", value: "true");
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 '/splash',

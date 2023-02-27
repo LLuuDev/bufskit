@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:bufskit/pages/privacy_page.dart';
 import 'package:bufskit/pages/login_page.dart';
 import 'package:bufskit/pages/main_page.dart';
 import 'package:bufskit/pages/information_page.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MainPage(),
         '/splash': (context) => const SplashPage(),
+        '/privacy': (context) => const PrivacyPage(),
         '/login': (context) => const LoginPage(),
         '/information': (context) => const InformationPage(),
         '/uninotice': (context) => const UninoticePage(),

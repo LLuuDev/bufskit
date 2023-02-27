@@ -26,38 +26,45 @@ class _SplashPageState extends State<SplashPage> {
   String? manualLogin = ""; //user의 정보를 저장하기 위한 변수
   String? fastLogin = "false"; //나중에 성적 새로고침 할때 false 로 바꿔주기
   String? failLogin = ""; //user의 정보를 저장하기 위한 변수
+  String? privacy = ""; //user의 정보를 저장하기 위한 변수
   static const storage = FlutterSecureStorage();
   CookieManager cookieManager = CookieManager.instance();
   bool? _tryLogin = false;
   bool? _checkLogin = false;
   bool? _checkData = false;
-  bool? _busSchedule = false;
+  // bool? _busSchedule = false;
   bool? _foodSchedule = false;
   late Timer _timer1;
-  late Timer _timer2;
+  // late Timer _timer2;
   late Timer _timer3;
   _asyncMethod() async {
     userId = await storage.read(key: 'userId');
     userPw = await storage.read(key: 'userPw');
     autoLogin = await storage.read(key: 'autoLogin');
     manualLogin = await storage.read(key: 'manualLogin');
+    privacy = await storage.read(key: 'privacy');
+
     if (manualLogin == "true") {
       await storage.write(
           key: "manualLogin",
           value: "false");
       // Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false,);
     } else {
-      if (autoLogin == "true") {
+      if (privacy == "true") {
+        if (autoLogin == "true") {
+        } else {
+          await storage.delete(key: "userId");
+          await storage.delete(key: "userPw");
+          await storage.delete(key: "autoLogin");
+          await storage.delete(key: "manualLogin");
+          await storage.delete(key: "fastLogin");
+          await storage.delete(key: "userInfo");
+          Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false,);
+        }
       } else {
-        await storage.delete(key: "userId");
-        await storage.delete(key: "userPw");
-        await storage.delete(key: "autoLogin");
-        await storage.delete(key: "manualLogin");
-        await storage.delete(key: "fastLogin");
-        await storage.delete(key: "userInfo");
-        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false,);
-
+        Navigator.pushNamedAndRemoveUntil(context, '/privacy', (route) => false,);
       }
+
       // Navigator.pushReplacementNamed(context, '/login');
     }
   }
@@ -326,51 +333,51 @@ getData();
         await controller.loadUrl(
             urlRequest: URLRequest(
                 url: Uri.parse(
-                    "https://www.bufs.ac.kr/bbs/board.php?bo_table=camp_guide&sca=%EC%85%94%ED%8B%80%EB%B2%84%EC%8A%A4%EC%95%88%EB%82%B4")));
-      }
-    });
-  }
-
-  void busSchedule(controller) async {
-    await controller.evaluateJavascript(source: """
-datas = document.getElementsByClassName("table_01")[0].getElementsByTagName("span");
-const getBusSchedule = async () => {
-    for (let j = 0; j < datas.length; j++) {
-        tmp = datas[j].innerText.split(":");
-        mins = (parseInt(tmp[0]) * 60) + parseInt(tmp[1]);
-        busSchedule.push(mins);
-    }
-}
-
-busSchedule = []
-busStatus = false
-
-const getDatas = async () => {
-    await getBusSchedule();
-    busSchedule = JSON.stringify(busSchedule);
-    busStatus = true;
-};
-getDatas();
-
-      """);
-
-    _timer2 = Timer.periodic(Duration(milliseconds:100), (timer) async {
-      // print((await controller.evaluateJavascript(source: 'document')));
-      if ((await controller.evaluateJavascript(source: 'busStatus')) == true) {
-        await storage.write(
-            key: "busSchedule",
-            value: (await controller.evaluateJavascript(source: 'busSchedule')).toString());
-        setState(() {
-          _busSchedule = true;
-        });
-        _timer2.cancel();
-        await controller.loadUrl(
-            urlRequest: URLRequest(
-                url: Uri.parse(
                     "https://www.bufs.ac.kr/bbs/board.php?bo_table=weekly_meal&wr_id=1")));
       }
     });
   }
+
+//   void busSchedule(controller) async {
+//     await controller.evaluateJavascript(source: """
+// datas = document.getElementsByClassName("table_01")[0].getElementsByTagName("span");
+// const getBusSchedule = async () => {
+//     for (let j = 0; j < datas.length; j++) {
+//         tmp = datas[j].innerText.split(":");
+//         mins = (parseInt(tmp[0]) * 60) + parseInt(tmp[1]);
+//         busSchedule.push(mins);
+//     }
+// }
+//
+// busSchedule = []
+// busStatus = false
+//
+// const getDatas = async () => {
+//     await getBusSchedule();
+//     busSchedule = JSON.stringify(busSchedule);
+//     busStatus = true;
+// };
+// getDatas();
+//
+//       """);
+//
+//     _timer2 = Timer.periodic(Duration(milliseconds:100), (timer) async {
+//       // print((await controller.evaluateJavascript(source: 'document')));
+//       if ((await controller.evaluateJavascript(source: 'busStatus')) == true) {
+//         await storage.write(
+//             key: "busSchedule",
+//             value: (await controller.evaluateJavascript(source: 'busSchedule')).toString());
+//         setState(() {
+//           _busSchedule = true;
+//         });
+//         _timer2.cancel();
+//         await controller.loadUrl(
+//             urlRequest: URLRequest(
+//                 url: Uri.parse(
+//                     "https://www.bufs.ac.kr/bbs/board.php?bo_table=weekly_meal&wr_id=1")));
+//       }
+//     });
+//   }
   void foodSchedule(controller) async {
     await controller.evaluateJavascript(source: """
 date = ['monday','tuesday','wednesday','thursday','friday']
@@ -445,7 +452,7 @@ getDatass();
                   await controller.loadUrl(
                       urlRequest: URLRequest(
                           url: Uri.parse(
-                              "https://www.bufs.ac.kr/bbs/board.php?bo_table=camp_guide&sca=%EC%85%94%ED%8B%80%EB%B2%84%EC%8A%A4%EC%95%88%EB%82%B4")));
+                              "https://www.bufs.ac.kr/bbs/board.php?bo_table=weekly_meal&wr_id=1")));
                   // busSchedule(controller);
                 } else {
                   await controller.loadUrl(
@@ -469,10 +476,10 @@ getDatass();
                 if (_checkLogin == true && _checkData == false) {
                   checkData(controller);
                 }
-                if (_checkData == true && _busSchedule == false) {
-                  busSchedule(controller);
-                }
-                if (_busSchedule == true && _foodSchedule == false) {
+                // if (_checkData == true && _busSchedule == false) {
+                //   busSchedule(controller);
+                // }
+                if (_checkData == true && _foodSchedule == false) {
                   foodSchedule(controller);
                 }
               },
