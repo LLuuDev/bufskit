@@ -28,6 +28,8 @@ class _SchedulePageState extends State<SchedulePage> {
       setState(() {
         classSchedule = jsonData['class'];
         items = jsonData['class'].keys.toList();
+        dropdownvalue = items[0];
+        scheduleSemester = classSchedule![items[0]].toList();
       });
     }
   }

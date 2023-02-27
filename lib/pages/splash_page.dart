@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -32,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
   bool? _tryLogin = false;
   bool? _checkLogin = false;
   bool? _checkData = false;
-  // bool? _busSchedule = false;
+  bool? _busSchedule = false;
   bool? _foodSchedule = false;
   late Timer _timer1;
   // late Timer _timer2;
@@ -338,46 +339,22 @@ getData();
     });
   }
 
-//   void busSchedule(controller) async {
-//     await controller.evaluateJavascript(source: """
-// datas = document.getElementsByClassName("table_01")[0].getElementsByTagName("span");
-// const getBusSchedule = async () => {
-//     for (let j = 0; j < datas.length; j++) {
-//         tmp = datas[j].innerText.split(":");
-//         mins = (parseInt(tmp[0]) * 60) + parseInt(tmp[1]);
-//         busSchedule.push(mins);
-//     }
-// }
-//
-// busSchedule = []
-// busStatus = false
-//
-// const getDatas = async () => {
-//     await getBusSchedule();
-//     busSchedule = JSON.stringify(busSchedule);
-//     busStatus = true;
-// };
-// getDatas();
-//
-//       """);
-//
-//     _timer2 = Timer.periodic(Duration(milliseconds:100), (timer) async {
-//       // print((await controller.evaluateJavascript(source: 'document')));
-//       if ((await controller.evaluateJavascript(source: 'busStatus')) == true) {
-//         await storage.write(
-//             key: "busSchedule",
-//             value: (await controller.evaluateJavascript(source: 'busSchedule')).toString());
-//         setState(() {
-//           _busSchedule = true;
-//         });
-//         _timer2.cancel();
-//         await controller.loadUrl(
-//             urlRequest: URLRequest(
-//                 url: Uri.parse(
-//                     "https://www.bufs.ac.kr/bbs/board.php?bo_table=weekly_meal&wr_id=1")));
-//       }
-//     });
-//   }
+  void busSchedule(controller) async {
+    final url = Uri.parse('https://raw.githubusercontent.com/LLuuDev/bufskit/master/assets/texts/bus_schedule.txt');
+    var response = await http.get(url);
+    String responseBody = utf8.decode(response.bodyBytes);
+    await storage.write(
+        key: "busSchedule",
+        value: (jsonDecode(responseBody).toString())
+    );
+    setState(() {
+      _busSchedule = true;
+    });
+    await controller.loadUrl(
+        urlRequest: URLRequest(
+            url: Uri.parse(
+                "https://www.bufs.ac.kr/bbs/board.php?bo_table=weekly_meal&wr_id=1")));
+  }
   void foodSchedule(controller) async {
     await controller.evaluateJavascript(source: """
 date = ['monday','tuesday','wednesday','thursday','friday']
@@ -476,9 +453,9 @@ getDatass();
                 if (_checkLogin == true && _checkData == false) {
                   checkData(controller);
                 }
-                // if (_checkData == true && _busSchedule == false) {
-                //   busSchedule(controller);
-                // }
+                if (_checkData == true && _busSchedule == false) {
+                  busSchedule(controller);
+                }
                 if (_checkData == true && _foodSchedule == false) {
                   foodSchedule(controller);
                 }
