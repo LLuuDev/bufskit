@@ -42,7 +42,7 @@ class _FoodPageState extends State<FoodPage> {
       // DateTime now = DateTime.utc(2023, 2, 28);
       if (now.weekday != 6 && now.weekday != 7) {
         setState(() {
-          todayFood = jsonData[engWeekday[now.weekday]];
+          todayFood = jsonData[engWeekday[now.weekday-1]];
         });
       }
       // print(now.weekday);
