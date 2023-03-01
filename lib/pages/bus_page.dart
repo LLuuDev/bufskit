@@ -311,7 +311,7 @@ class _BusPageState extends State<BusPage> {
             flex: 3,
             child: Container(
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 5),
               color: const Color.fromRGBO(113, 111, 233, 1),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
