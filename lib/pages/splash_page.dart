@@ -411,7 +411,10 @@ foodSchedule = {}
 
 foodStatus = false
 const getDatass = async () => {
-    await getFoodSchedule();
+    try {
+        await getFoodSchedule();
+    } catch (e) {
+    }
     foodSchedule = JSON.stringify(foodSchedule)
     foodStatus = true;
 };

@@ -40,20 +40,39 @@ class _InformationPageState extends State<InformationPage> {
             flex: 3,
             child: Container(
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
               color: const Color.fromRGBO(113, 111, 233, 1),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    '앱 정보',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
+                children: [
+                  Container(height: MediaQuery.of(context).padding.top, color: const Color.fromRGBO(113, 111, 233, 1),),
+                  Expanded(child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      IconButton(
+                        padding: EdgeInsets.zero, // 패딩 설정
+                        constraints: BoxConstraints(), // constraints
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(
+                          Icons.keyboard_arrow_left,
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                      ),
+                      Text(
+                        '앱 정보',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],),),
+
                 ],
               ),
             ),
