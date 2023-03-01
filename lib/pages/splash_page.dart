@@ -213,8 +213,9 @@ const getUserclass = async () => {
                             schedulecc = tmpcc[1].slice(0, -1).split(",");
 
                             if (classroomcc.length === 1) {
-                                datestmpcc = "월";
-                                datetmpcc = "1";
+                                // datesList = ["월","화","수","목","금"]
+                                datestmpcc = "";
+                                datetmpcc = "";
                                 classtmpcc = classroomcc[0];
                                 for (let p = 0; p < schedulecc.length; p++) {
                                     if (isNaN(parseInt(schedulecc[p]))) {
@@ -229,13 +230,30 @@ const getUserclass = async () => {
                                             [j + 1].getElementsByTagName("td")[7].innerText)
 
                                     } else {
-                                        userInfo.class[semesterInfo][datestmpcc][datetmpcc][1] += 1;
+                                        if (datestmpcc === "") {
+                                            if (datetmpcc === "") {
+                                                for (let t = 0; t < 5; t++) {
+                                                    userInfo.class[semesterInfo][t][schedulecc[p]] = [];
+                                                    userInfo.class[semesterInfo][t][schedulecc[p]].push(subjectInfo);
+                                                    userInfo.class[semesterInfo][t][schedulecc[p]].push(1);
+                                                    userInfo.class[semesterInfo][t][schedulecc[p]].push(classtmpcc);
+                                                    userInfo.class[semesterInfo][t][schedulecc[p]].push(classSubjecttbody()
+                                                        .getElementsByTagName("tr")
+                                                        [j + 1].getElementsByTagName("td")[7].innerText)
+                                                }
+                                                datetmpcc = schedulecc[p];
+                                            } else {
+                                                for (let y = 0; y < 5; y++) {
+                                                    userInfo.class[semesterInfo][y][datetmpcc][1] += 1;
+                                                }
+                                            }
+                                        } else {userInfo.class[semesterInfo][datestmpcc][datetmpcc][1] += 1;}
 
                                     }
                                 }
                             } else {
-                                datestmpcc = "월";
-                                datetmpcc = "1";
+                                datestmpcc = "";
+                                datetmpcc = "";
                                 classtmpcc = classroomcc[0];
                                 classtmpcountcc = 0;
                                 for (let p = 0; p < schedulecc.length; p++) {
@@ -336,8 +354,14 @@ const getUserscore = async () => {
 let userInfo = {};
 dataStatus = false
 const getData = async () => {
-    await getUserinfo();
-    await getUserclass();
+    try {
+        await getUserinfo();
+    } catch (e) {
+    }
+    try {
+        await getUserclass();
+    } catch (e) {
+    }
     try {
         await getUserscore();
     } catch (e) {
@@ -346,8 +370,6 @@ const getData = async () => {
     dataStatus = true
 };
 getData();
-
-
       """);
     _timer1 = Timer.periodic(Duration(milliseconds:100), (timer) async {
       // print((await controller.evaluateJavascript(source: 'userInfo')));
