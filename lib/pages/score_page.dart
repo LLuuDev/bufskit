@@ -86,7 +86,7 @@ class _ScorePageState extends State<ScorePage> {
                         ),
                       ),
                       Text(
-                        '학기별 성',
+                        '학기별 성적',
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w600,
