@@ -261,7 +261,7 @@ class _SchedulePageState extends State<SchedulePage> {
                                                 });
                                               }
                                               return Positioned(
-                                                  top: 20 + boxHeight * index,
+                                                  top: 20 + boxHeight * (index-1),
                                                   height: boxHeight*scheduleSemester[i][index][1],
                                                   width: (MediaQuery.of(context)
                                                       .size
