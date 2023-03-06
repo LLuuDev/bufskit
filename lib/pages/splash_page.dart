@@ -512,25 +512,25 @@ getDatass();
               },
             ),
           ),
-          // Container(
-          //   height: MediaQuery.of(context).size.height,
-          //   width: MediaQuery.of(context).size.width,
-          //   color: const Color.fromRGBO(113, 111, 233, 1),
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     // crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: const [
-          //       Text(
-          //         'BUFS',
-          //         style: TextStyle(
-          //           fontSize: 64,
-          //           fontWeight: FontWeight.w700,
-          //           color: Colors.white,
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: const Color.fromRGBO(113, 111, 233, 1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'BUFS',
+                  style: TextStyle(
+                    fontSize: 64,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       )
     );
