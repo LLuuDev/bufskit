@@ -23,7 +23,7 @@ class _FoodPageState extends State<FoodPage> {
     "corner2": "",
     "corner3": ["", "", ""],
     "common": [],
-    "corner4": "",
+    "breakfast": "",
     "snack": []
   };
   List<String> engWeekday = [
@@ -122,8 +122,8 @@ class _FoodPageState extends State<FoodPage> {
                               child: Row(
                                 children: [
                                   Container(
-                                    width: 125,
-                                    height: 125,
+                                    width: 115,
+                                    height: 140,
                                     padding: const EdgeInsets.all(15),
                                     color:
                                         const Color.fromRGBO(113, 111, 233, 1),
@@ -132,6 +132,14 @@ class _FoodPageState extends State<FoodPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
+                                          Text(
+                                            "아침",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                           Text(
                                             "점심 / 저녁",
                                             style: TextStyle(
@@ -170,13 +178,21 @@ class _FoodPageState extends State<FoodPage> {
                                   ),
                                   Expanded(
                                       child: Container(
-                                    height: 125,
+                                    height: 140,
                                     padding: const EdgeInsets.all(15),
                                     color: Colors.white,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
+                                        Text(
+                                          "08:00 ~ 09:00",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.black,
+                                          ),
+                                        ),
                                         Text(
                                           "10:30 ~ 18:00",
                                           style: TextStyle(
@@ -402,62 +418,131 @@ class _FoodPageState extends State<FoodPage> {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          spreadRadius: 0,
-                                          blurRadius: 20,
-                                          offset: const Offset(0, 0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey
+                                                  .withOpacity(0.2),
+                                              spreadRadius: 0,
+                                              blurRadius: 20,
+                                              offset:
+                                              const Offset(0, 0),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 60,
-                                          padding: const EdgeInsets.all(15),
-                                          color: const Color.fromRGBO(
-                                              113, 111, 233, 1),
-                                          child: Center(
-                                            child: Text(
-                                              "분식",
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.white,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 60,
+                                              padding:
+                                              const EdgeInsets.all(
+                                                  15),
+                                              color:
+                                              const Color.fromRGBO(
+                                                  113, 111, 233, 1),
+                                              child: Center(
+                                                child: Text(
+                                                  "조식",
+                                                  style: TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight:
+                                                    FontWeight.w600,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 212,
-                                          padding: const EdgeInsets.all(15),
-                                          color: Colors.white,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              ...List.generate(
-                                                  todayFood!["snack"].length,
-                                                  (index) {
-                                                return Text(
-                                                  "${todayFood!["snack"][index]}",
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.black,
+                                            Container(
+                                              height: 35,
+                                              // padding:
+                                              // const EdgeInsets.all(
+                                              //     15),
+                                              color: Colors.white,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  Text(
+                                                    "${todayFood!["breakfast"]}",
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w400,
+                                                      color:
+                                                      Colors.black,
+                                                    ),
                                                   ),
-                                                );
-                                              }),
-                                            ],
-                                          ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
+                                      ),
+                                      SizedBox(height: 15,),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.withOpacity(0.2),
+                                              spreadRadius: 0,
+                                              blurRadius: 20,
+                                              offset: const Offset(0, 0),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 60,
+                                              padding: const EdgeInsets.all(15),
+                                              color: const Color.fromRGBO(
+                                                  113, 111, 233, 1),
+                                              child: Center(
+                                                child: Text(
+                                                  "분식",
+                                                  style: TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              height: 102,
+                                              // padding: const EdgeInsets.all(15),
+                                              color: Colors.white,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                                children: [
+                                                  ...List.generate(
+                                                      todayFood!["snack"].length,
+                                                          (index) {
+                                                        return Text(
+                                                          "${todayFood!["snack"][index]}",
+                                                          style: TextStyle(
+                                                            fontSize: 11,
+                                                            fontWeight: FontWeight.w400,
+                                                            color: Colors.black,
+                                                          ),
+                                                        );
+                                                      }),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 )
                               ],
                             ),

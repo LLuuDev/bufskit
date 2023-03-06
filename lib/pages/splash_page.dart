@@ -411,33 +411,30 @@ date = ['monday','tuesday','wednesday','thursday','friday']
 const getFoodSchedule = async () => {
     for (let i = 0; i<5; i++) {
         foodSchedule[date[i]] = {}
+        foodSchedule[date[i]].breakfast = document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[3].innerText.replace("\\n","").trim()
         corner1list = []
-        corner1list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[3].innerText.replace("\\n","").trim())
-        corner1list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[4].innerText.replace("\\n","").trim())
-        corner1list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[5].innerText.replace("\\n","").trim())
+        corner1list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[6].innerText.replace("\\n","").trim())
+        corner1list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[7].innerText.replace("\\n","").trim())
+        corner1list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[8].innerText.replace("\\n","").trim())
         foodSchedule[date[i]].corner1 = corner1list
-        foodSchedule[date[i]].corner2 = document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[7].innerText.replace("\\n","").trim()
+        foodSchedule[date[i]].corner2 = document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[10].innerText.replace("\\n","").trim()
         corner3list = []
-        corner3list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[9].innerText.replace("\\n","").trim())
-        corner3list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[10].innerText.replace("\\n","").trim())
-        corner3list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[11].innerText.replace("\\n","").trim())
+        corner3list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[12].innerText.replace("\\n","").trim())
+        corner3list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[13].innerText.replace("\\n","").trim())
+        corner3list.push(document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[14].innerText.replace("\\n","").trim())
         foodSchedule[date[i]].corner3 = corner3list
-        commonlist = document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[13].innerText.replace("\\n","").trim().split(",");
+        commonlist = document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[16].innerText.replace("\\n","").trim().split(",");
         foodSchedule[date[i]].common = commonlist
-        foodSchedule[date[i]].corner4 = document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[15].innerText.replace("\\n","").trim()
-        snackList = document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[17].innerText.replace("\\n","").trim().split(",");
+        snackList = document.getElementsByTagName("table")[i+1].getElementsByTagName("td")[18].innerText.replace("\\n","").trim().split(",");
         foodSchedule[date[i]].snack = snackList
     }
 }
-foodSchedule = {}
+foodSchedule = {};
 
-foodStatus = false
+foodStatus = false;
 const getDatass = async () => {
-    try {
-        await getFoodSchedule();
-    } catch (e) {
-    }
-    foodSchedule = JSON.stringify(foodSchedule)
+    await getFoodSchedule();
+    foodSchedule = JSON.stringify(foodSchedule);
     foodStatus = true;
 };
 getDatass();
@@ -515,25 +512,25 @@ getDatass();
               },
             ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            color: const Color.fromRGBO(113, 111, 233, 1),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'BUFS',
-                  style: TextStyle(
-                    fontSize: 64,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   height: MediaQuery.of(context).size.height,
+          //   width: MediaQuery.of(context).size.width,
+          //   color: const Color.fromRGBO(113, 111, 233, 1),
+          //   child: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     // crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: const [
+          //       Text(
+          //         'BUFS',
+          //         style: TextStyle(
+          //           fontSize: 64,
+          //           fontWeight: FontWeight.w700,
+          //           color: Colors.white,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       )
     );

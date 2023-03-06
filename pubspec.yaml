@@ -3,7 +3,7 @@ description: 부산외국어대학교 통합 정보 애플리케이션
 
 publish_to: 'none'
 
-version: 1.0.7+8
+version: 1.0.8+9
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
