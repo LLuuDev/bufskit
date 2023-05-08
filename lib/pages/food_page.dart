@@ -24,7 +24,8 @@ class _FoodPageState extends State<FoodPage> {
     "corner3": ["", "", ""],
     "common": [],
     "breakfast": "",
-    "snack": []
+    "snack": [],
+    "main": []
   };
   List<String> engWeekday = [
     "monday",
