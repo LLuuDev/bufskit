@@ -1,10 +1,10 @@
 {
   "version": {
+    "secureStorage": "1.0",
     "cafeteriaMenu": "1.0",
     "busSchedule": "1.0",
     "userInfo": "1.0",
     "midtermExam": "1.0",
-    "finalExam": "1.0",
-    "secureStorage": "1.0"
+    "finalExam": "1.0"
   }
 }

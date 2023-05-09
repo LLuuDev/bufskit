@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:bufskit/pages/splash.dart';
 import 'package:bufskit/pages/dashboard.dart';
 import 'package:bufskit/pages/login.dart';
 import 'package:bufskit/pages/cafeteria.dart';
@@ -10,7 +11,6 @@ import 'package:bufskit/pages/dashboard.dart';
 import 'package:bufskit/pages/information_page.dart';
 import 'package:bufskit/pages/uninotice_page.dart';
 import 'package:bufskit/pages/acanotice_page.dart';
-import 'package:bufskit/pages/splash_page.dart';
 import 'package:bufskit/pages/schedule_page.dart';
 import 'package:bufskit/pages/score_page.dart';
 import 'package:bufskit/pages/student_page.dart';
@@ -103,9 +103,9 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
-      initialRoute: '/cafeteria',
+      initialRoute: '/',
       routes: {
-        // '/': (context) => const SplashPage(),
+        '/': (context) => const SplashPage(),
         '/dashboard': (context) => const DashboardPage(),
         '/cafeteria': (context) => const CafeteriaPage(),
         '/login': (context) => const LoginPage(),

@@ -16,7 +16,6 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -42,30 +41,30 @@ class _DashboardPageState extends State<DashboardPage> {
                             const SizedBox(
                               height: 15,
                             ),
-                            InkWell(
-                              borderRadius: BorderRadius.circular(15.0),
-                              onTap: () async {
-                                final url = Uri.parse(
-                                  'https://www.instagram.com/p/CrA5TzFppX0',
-                                );
-                                if (await canLaunchUrl(url)) {
-                                launchUrl(url);
-                                } else {
-                                // ignore: avoid_print
-                                print("Can't launch $url");
-                                }
-                              },
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(15), // Image border
-                                          child: Image.network('https://www.instagram.com/p/CrA5TzFppX0/media/?size=l',fit: BoxFit.fill,)
-                                      )
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // InkWell(
+                            //   borderRadius: BorderRadius.circular(15.0),
+                            //   onTap: () async {
+                            //     final url = Uri.parse(
+                            //       'https://www.instagram.com/p/CrA5TzFppX0',
+                            //     );
+                            //     if (await canLaunchUrl(url)) {
+                            //     launchUrl(url);
+                            //     } else {
+                            //     // ignore: avoid_print
+                            //     print("Can't launch $url");
+                            //     }
+                            //   },
+                            //   child: Row(
+                            //     children: [
+                            //       Expanded(
+                            //           child: ClipRRect(
+                            //               borderRadius: BorderRadius.circular(15), // Image border
+                            //               child: Image.network('https://www.instagram.com/p/CrA5TzFppX0/media/?size=l',fit: BoxFit.fill,)
+                            //           )
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
 
                             const SizedBox(
                               height: 15,
